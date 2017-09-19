@@ -13174,7 +13174,11 @@ xyU4zmHkG3IAAAAASUVORK5CYII=
 </li>
 <li><p>Left : It is important to consider vehicles coming from the left for safety.</p>
 </li>
+<li><p>Right : There is no need to consider the vehicles coming from the right as the smartcab can take a free right turn.</p>
+</li>
 <li><p>Oncoming : This is needed. If the smartcab wants to turn left and the car in the oncoming lane wants to turn right or proceed straight, it would be useful to consider the oncoming feature.</p>
+</li>
+<li><p>Deadline : Deadline is not needed at it has values ranging from 0 - 100 and would lead to an increase in the state space.</p>
 </li>
 </ul>
 
@@ -16920,7 +16924,8 @@ zjnnnKuT/w/F3A8UXnGH9gAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ol>
-<li></li>
+<li><p>The optimal policy would be to reach the destination as fast as possible with making any bad decisions or violations.</p>
+</li>
 <li><p>The policy for most states is optimal. Some states occasionally have an unexpected policy.</p>
 </li>
 <li></li>
@@ -16934,38 +16939,25 @@ zjnnnKuT/w/F3A8UXnGH9gAAAABJRU5ErkJggg==
 </thead>
 <tbody>
 <tr>
-<td>{'waypoint':'forward', 'light': 'green', 'left': None, 'oncoming': None}</td>
-<td>forward</td>
-<td>forward</td>
-</tr>
-<tr>
-<td>{'waypoint':'right', 'light': 'right', 'left': 'right', 'oncoming': 'forward'}</td>
+<td>{'waypoint':'forward', 'light': 'red', 'left': None, 'oncoming': 'forward'}</td>
 <td>None</td>
 <td>None</td>
 </tr>
 <tr>
-<td>{'waypoint':'forward', 'light': 'green', 'left': 'forward', 'oncoming': 'forward'}</td>
+<td>{'waypoint':'left', 'light': 'green', 'left': 'forward', 'oncoming': 'left'}</td>
+<td>left</td>
+<td>left</td>
+</tr>
+<tr>
+<td>{'waypoint':'right', 'light': 'red', 'left': None, 'oncoming': 'forward'}</td>
 <td>right</td>
 <td>right</td>
 </tr>
 </tbody>
 </table>
-<p>4.</p>
-<table>
-<thead><tr>
-<th>State</th>
-<th>Expected Action</th>
-<th>Learned Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{'waypoint':'forward', 'light': 'red', 'left': 'forward', 'oncoming': 'forward'}</td>
-<td>None</td>
-<td>forward</td>
-</tr>
-</tbody>
-</table>
+<ol>
+<li>I am unable to find a sub-optimal policy. I feel that it is safe to assume that the policies of the Q-table are optimal</li>
+</ol>
 
 </div>
 </div>

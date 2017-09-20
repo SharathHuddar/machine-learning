@@ -16915,42 +16915,62 @@ zjnnnKuT/w/F3A8UXnGH9gAAAABJRU5ErkJggg==
 <ol>
 <li><p>The optimal policy would be to reach the destination as fast as possible with making any bad decisions or violations. For instance :</p>
 <ul>
-<li>when the light is red, the smartcab must not move. If the light is green, the smartcab must check if an oncoming vehicle is going forward or turning to its right if the smartcab wishes to turn left.</li>
-<li>If the light is green and the cab wishes to take a right turn, it must check is a vehicle from the left is moving forward.</li>
+<li>when the light is red, the smartcab must not move except when it is taking a right turn. In this exception, the smartcab must ensure than no vehicle is coming from the left side. </li>
+<li>If the light is green, the smartcab must check if an oncoming vehicle is going forward or turning to its right if the smartcab wishes to turn left.</li>
 <li>If the smartcab wishes to go forward when the light is green, it must ensure that no vehicles are moving forward from either left or right and no oncoming vehicle is trying to make a left turn.</li>
 </ul>
 </li>
 <li><p>The policy for most states is optimal. Some states occasionally have an unexpected policy.</p>
 </li>
-<li></li>
-</ol>
-<table>
-<thead><tr>
-<th>State</th>
-<th>Expected Action</th>
-<th>Learned Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{'waypoint':'forward', 'light': 'red', 'left': None, 'oncoming': 'forward'}</td>
-<td>None</td>
-<td>None</td>
-</tr>
-<tr>
-<td>{'waypoint':'left', 'light': 'green', 'left': 'forward', 'oncoming': 'left'}</td>
-<td>left</td>
-<td>left</td>
-</tr>
-<tr>
-<td>{'waypoint':'right', 'light': 'red', 'left': None, 'oncoming': 'forward'}</td>
-<td>right</td>
-<td>right</td>
-</tr>
-</tbody>
-</table>
+<li><p>Let us consider the following states</p>
+<p>-</p>
+
+<pre><code> ('forward', 'red', None, 'forward')
+  -- forward : -8.26
+  -- right : 0.56
+  -- None : 1.92
+  -- left : -8.82
+
+  Expected action : None
+  Learned action : None
+
+</code></pre>
+<p>-</p>
+
+<pre><code> ('left', 'green', 'forward', 'left')
+      -- forward : 0.21
+      -- right : 0.23
+      -- None : -1.02
+      -- left : 1.29
+
+  Expected action : left
+  Learned action : left
+
+</code></pre>
+<p>-</p>
+
+<pre><code> ('right', 'red', None, 'forward')
+      -- forward : -4.49
+      -- right : 1.89
+      -- None : 0.36
+      -- left : -4.87
+
+  Expected action : right
+  Learned action : right
+
+</code></pre>
 <ol>
-<li>I am unable to find a sub-optimal policy. I feel that it is safe to assume that the policies of the Q-table are optimal</li>
+<li><p>The following state action pair is sub-optimal</p>
+<p>('left', 'green', 'right', 'right')
+-- forward : 0.02
+-- right : 0.12
+-- None : -0.15
+-- left : -0.81</p>
+<p>Expected action : left 
+Learned action : right</p>
+</li>
+</ol>
+</li>
 </ol>
 
 </div>

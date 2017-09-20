@@ -11836,7 +11836,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import the visualization code</span>
@@ -11968,7 +11968,7 @@ Run the agent.py file after setting the flags from projects/smartcab folder inst
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Load the &#39;sim_no-learning&#39; log file from the initial simulation results</span>
@@ -13167,20 +13167,9 @@ xyU4zmHkG3IAAAAASUVORK5CYII=
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<ul>
-<li><p>Waypoint : It is required to direct the smartcab towards the destination and hence must be considered for efficiency.</p>
-</li>
-<li><p>Light : Ignoring a traffic light can cause accidents. Hence it is required for safety.</p>
-</li>
-<li><p>Left : It is important to consider vehicles coming from the left for safety.</p>
-</li>
-<li><p>Right : There is no need to consider the vehicles coming from the right as the smartcab can take a free right turn.</p>
-</li>
-<li><p>Oncoming : This is needed. If the smartcab wants to turn left and the car in the oncoming lane wants to turn right or proceed straight, it would be useful to consider the oncoming feature.</p>
-</li>
-<li><p>Deadline : Deadline is not needed at it has values ranging from 0 - 100 and would lead to an increase in the state space.</p>
-</li>
-</ul>
+<p>The 'inputs' are all initially seem important for safety. It would be unsafe, and likely to cause an accident, if the agent ignores a red 'light' and moves anyway (unless potentially turning right). If 'left' has a car that intends to go straight, then the car should not take a right turn on a red light, as this would cause an accident. However, if the car on the 'left' intends to go right or left, the agent is also safe to take a right. I think 'right' would not necessarily matter, unless the car would be able to take a U-turn within an intersection, so we could ignore it. 'Oncoming' is important when our agent wants to turn left, as if the light is green it still needs to wait.
+For efficiency, 'waypoint' and 'deadline' would both seem to matter at first glance. It can't be efficient if it ignores the waypoint, as it will only randomly drive around. At first, 'deadline' seems important; however, my guess is that the cab will start to learn to be more dangerous in order to meet its deadline - and we don't want that. So we'll toss it out.
+So it looks like we need each of those other than 'right' and 'deadline'.</p>
 
 </div>
 </div>
@@ -16924,7 +16913,12 @@ zjnnnKuT/w/F3A8UXnGH9gAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
 <ol>
-<li><p>The optimal policy would be to reach the destination as fast as possible with making any bad decisions or violations.</p>
+<li><p>The optimal policy would be to reach the destination as fast as possible with making any bad decisions or violations. For instance :</p>
+<ul>
+<li>when the light is red, the smartcab must not move. If the light is green, the smartcab must check if an oncoming vehicle is going forward or turning to its right if the smartcab wishes to turn left.</li>
+<li>If the light is green and the cab wishes to take a right turn, it must check is a vehicle from the left is moving forward.</li>
+<li>If the smartcab wishes to go forward when the light is green, it must ensure that no vehicles are moving forward from either left or right and no oncoming vehicle is trying to make a left turn.</li>
+</ul>
 </li>
 <li><p>The policy for most states is optimal. Some states occasionally have an unexpected policy.</p>
 </li>
